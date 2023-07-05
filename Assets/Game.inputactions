@@ -1,0 +1,54 @@
+{
+    "name": "Game",
+    "maps": [
+        {
+            "name": "Game",
+            "id": "78008438-5d93-44f7-a9d7-1092ecbcdf72",
+            "actions": [
+                {
+                    "name": "PaddleLeft",
+                    "type": "Button",
+                    "id": "df248d21-8176-49a4-80a1-125c06e847d8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "PaddleRight",
+                    "type": "Button",
+                    "id": "401a285f-63f7-4101-b059-88736d3cbd3a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "07d775b3-fdee-4587-b3cd-a792f12120e9",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PaddleLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "58935a2a-9b4a-4cbf-a3cb-38363d4219bb",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PaddleRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
