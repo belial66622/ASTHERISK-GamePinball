@@ -46,6 +46,15 @@ namespace PaddleInputs
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LauncBall"",
+                    ""type"": ""Button"",
+                    ""id"": ""c2c5b284-c7f1-40bb-9d30-7caec84194c1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -70,6 +79,17 @@ namespace PaddleInputs
                     ""action"": ""PaddleRight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""af37b0d4-18f8-4d6e-8038-415139d8198c"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LauncBall"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -80,6 +100,7 @@ namespace PaddleInputs
             m_Game = asset.FindActionMap("Game", throwIfNotFound: true);
             m_Game_PaddleLeft = m_Game.FindAction("PaddleLeft", throwIfNotFound: true);
             m_Game_PaddleRight = m_Game.FindAction("PaddleRight", throwIfNotFound: true);
+            m_Game_LauncBall = m_Game.FindAction("LauncBall", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -141,12 +162,14 @@ namespace PaddleInputs
         private IGameActions m_GameActionsCallbackInterface;
         private readonly InputAction m_Game_PaddleLeft;
         private readonly InputAction m_Game_PaddleRight;
+        private readonly InputAction m_Game_LauncBall;
         public struct GameActions
         {
             private @PaddleInput m_Wrapper;
             public GameActions(@PaddleInput wrapper) { m_Wrapper = wrapper; }
             public InputAction @PaddleLeft => m_Wrapper.m_Game_PaddleLeft;
             public InputAction @PaddleRight => m_Wrapper.m_Game_PaddleRight;
+            public InputAction @LauncBall => m_Wrapper.m_Game_LauncBall;
             public InputActionMap Get() { return m_Wrapper.m_Game; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -162,6 +185,9 @@ namespace PaddleInputs
                     @PaddleRight.started -= m_Wrapper.m_GameActionsCallbackInterface.OnPaddleRight;
                     @PaddleRight.performed -= m_Wrapper.m_GameActionsCallbackInterface.OnPaddleRight;
                     @PaddleRight.canceled -= m_Wrapper.m_GameActionsCallbackInterface.OnPaddleRight;
+                    @LauncBall.started -= m_Wrapper.m_GameActionsCallbackInterface.OnLauncBall;
+                    @LauncBall.performed -= m_Wrapper.m_GameActionsCallbackInterface.OnLauncBall;
+                    @LauncBall.canceled -= m_Wrapper.m_GameActionsCallbackInterface.OnLauncBall;
                 }
                 m_Wrapper.m_GameActionsCallbackInterface = instance;
                 if (instance != null)
@@ -172,6 +198,9 @@ namespace PaddleInputs
                     @PaddleRight.started += instance.OnPaddleRight;
                     @PaddleRight.performed += instance.OnPaddleRight;
                     @PaddleRight.canceled += instance.OnPaddleRight;
+                    @LauncBall.started += instance.OnLauncBall;
+                    @LauncBall.performed += instance.OnLauncBall;
+                    @LauncBall.canceled += instance.OnLauncBall;
                 }
             }
         }
@@ -180,6 +209,7 @@ namespace PaddleInputs
         {
             void OnPaddleLeft(InputAction.CallbackContext context);
             void OnPaddleRight(InputAction.CallbackContext context);
+            void OnLauncBall(InputAction.CallbackContext context);
         }
     }
 }

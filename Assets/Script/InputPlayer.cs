@@ -13,6 +13,8 @@ public class InputPlayer : MonoBehaviour
     [HideInInspector]public event Action Paddleleftpressed;
     [HideInInspector] public event Action Paddlerightreleased;
     [HideInInspector] public event Action Paddleleftreleased;
+    [HideInInspector] public event Action<bool> Launchpressed,Launchcancelled;
+
 
 
     private void Awake()
@@ -27,14 +29,19 @@ public class InputPlayer : MonoBehaviour
         _playerinput.Game.PaddleRight.performed += PaddleRightPressed;
         _playerinput.Game.PaddleLeft.canceled += PaddleLeftReleased;
         _playerinput.Game.PaddleRight.canceled += PaddleRightReleased;
+        _playerinput.Game.LauncBall.performed += LaunchPressed;
+        _playerinput.Game.LauncBall.canceled += LaunchCancelled;
     }
 
     private void OnDisable ()
     {
         _playerinput.Game.PaddleLeft.performed -= PaddleLeftPressed;
         _playerinput.Game.PaddleRight.performed -= PaddleRightPressed;
-        _playerinput.Game.PaddleLeft.canceled += PaddleLeftReleased;
-        _playerinput.Game.PaddleRight.canceled += PaddleRightReleased;
+        _playerinput.Game.PaddleLeft.canceled -= PaddleLeftReleased;
+        _playerinput.Game.PaddleRight.canceled -= PaddleRightReleased;
+        _playerinput.Game.LauncBall.performed -= LaunchPressed;
+        _playerinput.Game.LauncBall.canceled -= LaunchCancelled;
+
     }
 
 
@@ -58,5 +65,15 @@ public class InputPlayer : MonoBehaviour
     private void PaddleRightReleased(InputAction.CallbackContext obj)
     {
         Paddlerightreleased?.Invoke();
+    }
+
+    private void LaunchPressed(InputAction.CallbackContext obj)
+    {
+        Launchpressed?.Invoke(true);
+    }
+
+    private void LaunchCancelled(InputAction.CallbackContext obj)
+    {
+        Launchcancelled?.Invoke(false);
     }
 }
