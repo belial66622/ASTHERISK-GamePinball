@@ -39,7 +39,6 @@ public class Paddle : MonoBehaviour
         _hingeLeft = _paddleLeft.GetComponent<HingeJoint>();
         _hingeRight = _paddleright.GetComponent<HingeJoint>();
         _defaultModifier = _modifier;
-        _defaultSpringSpeed = _defaultSpringSpeed;
         _targetPressed = _hingeLeft.limits.max;
         _targetReleased = _hingeRight.limits.min;
     }

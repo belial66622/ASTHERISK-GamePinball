@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using UnityEngine;
+using UnityEngine.Windows;
 
 
 public class Ball : MonoBehaviour
@@ -11,10 +12,24 @@ public class Ball : MonoBehaviour
     private Rigidbody _ball;
     [SerializeField]
     float _maxSpeed;
-    
-    [SerializeField]bool _bounce;
+    [SerializeField] Launcher _launcher;
+    [SerializeField] bool _bounce;
+    [SerializeField] GameManager _gamemanager;
+    [SerializeField] Vector3 LauncherPos;
 
-        private void Start()
+    private void OnEnable()
+    {
+        _launcher.Launch += Launch;
+        _gamemanager.Gameover += PlaceBall;
+    }
+
+    private void OnDisable()
+    {
+        _launcher.Launch -= Launch;
+        _gamemanager.Gameover -= PlaceBall;
+    }
+
+    private void Start()
     {
         _ball = GetComponent<Rigidbody>();
     }
@@ -34,12 +49,20 @@ public class Ball : MonoBehaviour
 
     public void ChangeSpeed(float _multiplier)
     {
-        
+
         _ball.velocity *= _multiplier;
 
     }
 
-    public void PreventVerticalBounce() 
+
+    public void Launch(float force)
+    {
+        // dorong bola ke atas dengan menggunakan gaya dorong dngn besaran tertentu
+        GetComponent<Rigidbody>().AddForce(Vector3.forward * force);
+        Debug.Log("launch");
+    }
+
+    public void PreventVerticalBounce()
     {
         var ray = new Ray(transform.position, Vector3.down);
 
@@ -62,6 +85,12 @@ public class Ball : MonoBehaviour
         yield return new WaitForSeconds(2);
 
         _bounce = false;
-    
+
+    }
+
+    void PlaceBall()
+    {
+        _ball.velocity = Vector3.zero;
+        transform.position = LauncherPos;
     }
 }
