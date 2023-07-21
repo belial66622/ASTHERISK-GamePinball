@@ -5,7 +5,6 @@ using System.ComponentModel;
 using System.Security.Cryptography;
 using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class CoinManager : MonoBehaviour
 {
