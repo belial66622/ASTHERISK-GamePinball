@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/TugasProblemSolving1.unity
+    path: Assets/Scenes/TugasProblemSolving2.unity
     guid: 990cacbe14614214a95208b47e87ca10
   m_configObjects: {}
